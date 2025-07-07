@@ -1,0 +1,36 @@
+#Endereço IP e porta do nó com MongoDb
+DB_HOST=localhost 
+DB_PORT=27017
+#Nome do banco de dados
+DB_NAME=tcc-uff
+#Credenciais do usuário registrado no MongoDb para a api. Altere para algo longo e aleatório em produção!
+DB_API_USER=api_user
+DB_API_PASS=tcc2552
+
+#Endereço de IP, porta e protocolo da API. Utilize o protocolo https ou VPN privada para produção!
+API_HOST=localhost
+API_PORT=5000
+API_PROTOCOL=http
+#Chave secreta para autenticação JWT. Altere para algo longo e aleatório em produção!
+API_SECRET_KEY=tcc-uff-api-secret-key
+#Tempo de expiração do token JWT para usuários da WebApp em segundos. 3600 segundos = 1 hora.
+#Use entre 3600 e 7200 para produção!
+API_USER_TOKEN_EXPIRATION=3110400
+#Tempo de expiração do token JWT para as componentes do sistema que usam a api. 604800 segundos = 1 semana.
+#Use entre 604800 e 2419200 para produção!
+API_SERVICE_TOKEN_EXPIRATION=3110400
+
+#Endereço de IP, porta e protocolo do WebApp. Utilize o protocolo https para produção!
+WEBAPP_HOST=localhost
+WEBAPP_PORT=3000
+WEBAPP_PROTOCOL=http
+#Credenciais para autenticar no sistema através do WebApp. Altere para algo longo e aleatório em produção!
+WEBAPP_USER=admin
+#Password = "tcc-uff"
+#Comando para gerar o valor da variável: python -c "import bcrypt; print(bcrypt.hashpw(b'tcc-uff', bcrypt.gensalt()).decode())"
+WEBAPP_ENCRYPTED_PASS=$2b$12$OlwTuvyPk5tRtq.83yZ18ez9c03hPwPn/u7bwcrI5p5lGMGITQ8Ki
+
+#Chave secreta para autenticar o chatbot. Altere para algo longo e aleatório em produção!
+CHATBOT_SERVICE_KEY=tcc-uff-chatbot-service-key
+#Comando para gerar o valor da variável: python -c "import bcrypt; print(bcrypt.hashpw(b'tcc-uff-chatbot-service-key', bcrypt.gensalt()).decode())"
+CHATBOT_ENCRYPTED_SERVICE_KEY=$2b$12$1F7fr2210loNvwaehZMLYOvm4IN.HnCwX3lU4LZqtarDGw.2D1hwu

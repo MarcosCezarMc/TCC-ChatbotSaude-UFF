@@ -1,0 +1,715 @@
+/*
+   WEBAPP TCC UFF - CHATBOT ATENDIMENTO
+   Autor: Marcos Cezar - 2025
+*/
+
+/* ===================== Variáveis CSS ===================== */
+:root {
+    --cor-primaria: #113269;
+    --cor-secundaria: #295bb1;
+    --cor-destaque: #ffd700;
+    --cor-texto-claro: #e8f4fd;
+    --cor-texto-medio: #b8d4f0;
+    --cor-fundo: #f8f9fa;
+    --cor-error: #c53030;
+    --container-max: 95dvw;
+    --padding-padrao: 2rem;
+    --border-radius: 8px;
+    --sombra-leve: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================== Reset ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--cor-fundo);
+}
+
+/* ===================== Header ===================== */
+.header-tcc {
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+    color: #fff;
+    padding: 1.5rem 0;
+    box-shadow: var(--sombra-leve);
+    border-bottom: 3px solid var(--cor-destaque);
+}
+
+.header-container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--padding-padrao);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-logo-left, .header-logo-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo-left a, .header-logo-right a {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 0;
+}
+
+#logo-uff {
+    height: 80px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+#logo-ic {
+    height: 112px;
+    width: auto;
+    transition: transform 0.3s ease;
+    background-color: #fff;
+    border: 1px solid #333;
+    border-radius: var(--border-radius);
+    padding: 8px;
+    box-shadow: var(--sombra-leve);
+}
+
+#logo-uff:hover, #logo-ic:hover,
+.header-logo-left a:hover #logo-uff,
+.header-logo-right a:hover #logo-ic {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.header-title {
+    flex: 1;
+    text-align: center;
+}
+
+.header-title h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    color: var(--cor-destaque);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header-subtitle h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: var(--cor-texto-claro);
+}
+
+.discente {
+    font-size: 1.2rem;
+    color: var(--cor-texto-medio);
+    font-style: italic;
+    font-weight: 300;
+}
+
+/* ===================== App ===================== */
+#app {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: var(--container-max);
+    margin: var(--padding-padrao) auto;
+    padding: var(--padding-padrao);
+    background: var(--cor-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+}
+
+/* ========== App -> Tela de Login ========== */
+#login-container {
+    display: block;
+    padding: var(--padding-padrao);
+}
+
+.login-card {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-card h2 {
+    color: var(--cor-primaria);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.login-subtitle {
+    color: var(--cor-texto-medio);
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--cor-primaria);
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e1e5e9;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--cor-secundaria);
+    box-shadow: 0 0 0 3px rgba(41,91,177,0.1);
+}
+
+.btn-login {
+    width: 100%;
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+    color: #fff;
+    border: none;
+    padding: 0.875rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    margin-bottom: 1rem;
+}
+
+.btn-login:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(17,50,105,0.3);
+}
+
+.btn-login:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-login:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.login-error-message {
+    background: #fee;
+    color: var(--cor-error);
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #fed7d7;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* ========== App -> Dashboard ========== */
+#dashboard {
+    display: block;
+    flex: 1;
+    width: 100%;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    margin-bottom: var(--padding-padrao);
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: var(--padding-padrao);
+    min-height: 60px;
+}
+
+.dashboard-header h2 {
+    color: var(--cor-primaria);
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.btn-logout {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-logout:hover {
+    background: #c53030;
+}
+
+.dashboard-content {
+    display: block;
+    margin: 0 auto;
+}
+
+.alert-message {
+    font-weight: bold;
+    font-size: 2.3rem;
+}
+
+/* ========== App -> Dashboard -> Lista Paciente ========== */
+.pacientes-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    gap: 1rem;
+}
+
+.pacientes-search {
+    flex: 1 1 300px;
+    padding: 0.7rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background: #f8f9fa;
+    color: #333;
+}
+
+.pacientes-search:disabled {
+    background: #f3f7ff;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.btn-criar-paciente {
+    background: var(--cor-primaria);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s;
+}
+
+.btn-criar-paciente:hover {
+    background: var(--cor-secundaria);
+}
+
+.pacientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    overflow: hidden;
+}
+
+.pacientes-table th, .pacientes-table td {
+    padding: 1rem 0.7rem;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.pacientes-table th {
+    background: var(--cor-primaria);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.pacientes-table tr:last-child td {
+    border-bottom: none;
+}
+
+.pacientes-table tr:hover:not(#paciente-row-template) {
+    background: #f3f7ff;
+}
+
+.paciente-acoes button {
+    margin-right: 0.3rem;
+    background: none;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1.35rem;
+    transition: background 0.2s;
+    vertical-align: middle;
+}
+
+.paciente-acoes button:last-child {
+    margin-right: 0;
+}
+
+.paciente-acoes button:hover {
+    background: #e8f4fd;
+}
+
+.icon-detalhar {
+    color: #295bb1;
+}
+
+.icon-agendar {
+    color: #e6b800;
+}
+
+.icon-exames {
+    color: #2e8b57;
+}
+
+.icon-editar {
+    color: #f39c12;
+}
+
+.popup-paciente-list {
+    /* display: flex é inserido por script*/
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.popup-paciente-list-content {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: var(--border-radius);
+    min-width: 320px;
+    max-width: 90vw;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.popup-paciente-list-fechar {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--cor-primaria);
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 10;
+}
+
+.popup-paciente-list-fechar:hover {
+    color: var(--cor-error);
+}
+
+.popup-paciente-list-content h3 {
+    color: var(--cor-primaria);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.popup-paciente-list-content p {
+    font-size: 1.1rem;
+}
+
+.popup-agendar-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    transition: border-color 0.3s;
+    background: #f8f9fa;
+    color: #333;
+}
+
+.popup-agendar-input:focus {
+    border-color: var(--cor-secundaria);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(41,91,177,0.1);
+}
+
+.popup-paciente-list-btn {
+    background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 2.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(17,50,105,0.08);
+}
+
+.popup-paciente-list-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0d2547 0%, #1d407a 100%);
+}
+
+.popup-paciente-list-btn:disabled {
+    background: #b8d4f0;
+    color: #f3f7ff;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+.flatpickr-calendar {
+    font-family: inherit;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    border: 1px solid var(--cor-primaria);
+    z-index: 3000 !important;
+}
+
+.flatpickr-months,
+.flatpickr-weekdays {
+    background: var(--cor-primaria);
+    color: #fff;
+}
+
+.flatpickr-current-month,
+.flatpickr-current-month .cur-month,
+.flatpickr-current-month .numInput.cur-year {
+    color: var(--cor-destaque) !important;
+}
+
+.flatpickr-current-month select.cur-month {
+    background-color: var(--cor-primaria);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    font-size: inherit;
+}
+
+.flatpickr-current-month select.cur-month::-ms-expand {
+    display: none;
+}
+
+.flatpickr-current-month select.cur-month option {
+    color: var(--cor-secundaria);
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: #fff;
+}
+
+.flatpickr-day.today {
+    border-color: var(--cor-destaque);
+    background: #fffbe6;
+    color: var(--cor-primaria);
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+    background: var(--cor-secundaria);
+    color: #fff;
+}
+
+.flatpickr-time input {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--cor-secundaria);
+    font-size: 1.1rem;
+}
+
+.flatpickr-current-month input.cur-year {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--cor-secundaria);
+}
+
+/* ========== App -> Dashboard -> Detalhes do Paciente ========== */
+#paciente-detail {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+#paciente-detail h3 {
+    color: var(--cor-primaria);
+    margin-bottom: 1.5rem;
+}
+
+.paciente-detail-container {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.paciente-detail-dados, .paciente-detail-confirmacao {
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--sombra-leve);
+    padding: 2rem 2.5rem;
+    min-width: 340px;
+    max-width: 600px;
+    flex: 1 1 50%;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+.paciente-detail-dados {
+    border: 2px solid var(--cor-primaria);
+}
+
+.paciente-detail-confirmacao {
+    border: 2px solid var(--cor-secundaria);
+}
+
+.paciente-detail-dados h3,
+.paciente-detail-confirmacao h3 {
+    color: var(--cor-primaria);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.form-row-paciente {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-group-paciente {
+    flex: 1 1 180px;
+    min-width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-paciente label {
+    color: var(--cor-primaria);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    font-size: 0.98rem;
+}
+
+.paciente-detail-confirmacao .form-group-paciente label {
+    color: var(--cor-secundaria);
+}
+
+.form-group-paciente input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1.5px solid #e1e5e9;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.form-group-paciente input::placeholder {
+    color: #ababab;
+}
+
+.form-group-paciente input:enabled {
+    background: #fff;
+    color: #333;
+}
+
+.form-group-paciente input:disabled {
+    background: #ebebeb;
+    color: #6c6c6c;
+    cursor: not-allowed;
+}
+
+.paciente-detail-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-paciente-detail {
+    background: var(--cor-primaria);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.8rem 2.2rem;
+    margin: 0 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(17,50,105,0.08);
+}
+
+.btn-paciente-detail:hover:not(:disabled) {
+    background: var(--cor-secundaria);
+}
+
+.btn-paciente-detail:disabled {
+    background: #b8d4f0;
+    color: #f3f7ff;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+@media (max-width: 1100px) {
+    .paciente-detail-container {
+        flex-direction: column;
+        gap: 1.2rem;
+        align-items: stretch;
+    }
+    .paciente-detail-dados, .paciente-detail-confirmacao {
+        max-width: 100%;
+        min-width: 0;
+        padding: 1.2rem 1rem;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .form-row-paciente {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
