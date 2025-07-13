@@ -1,4 +1,97 @@
-# TCC UFF: Chatbot para Atendimento
+Chatbot for Patient Support
+Educational Telegram chatbot for patient support with the following components:
+Database to simulate a patient information base.
+Front-end with authentication to manage the patients in the database.
+API to connect the front-end and the patient database.
+Telegram chatbot to educationally simulate the idea proposed in the thesis.
+
+GerandoFor further details on the project's architecture and justification for the chosen tools, see the documentation: Project Architecture.Development Prerequisites
+
+Windows 11 or Windows 10
+Visual Studio Code (latest version)
+Python (3.12+)
+Git (latest version)
+MongoDB Community Server 8.0.10
+Mongo Shell 2.5.2
+MongoDB Compass 1.46.2
+
+Setting Up the Development Environment
+
+Install the tools from the previous section in the correct versions.
+Open PowerShell in your Git repositories folder.
+Clone this repository and navigate to the root of this project:
+
+Code   git clone git@github-marcoscezarmc:MarcosCezarMc/chatbot-tcc-saude.git   cd chatbot-tcc-saude/
+Use the pip tool that comes with Python to install the dependencies for the back-end components:
+
+Code   pip install -r api/requirements.txt   pip install -r chatbot/requirements.txt
+Create the .env file in the root of this project to configure the environment variables from the example file:
+
+Code   copy doc\dot-env-base .env
+⚠️ Attention: Do not change the values of the environment variables if you are organizing your environment for basic development only. Except in exceptional cases where there may be address or port conflicts in your operating system.
+
+Load the environment variables in the PowerShell you are using:
+
+Code   Get-Content .env | ForEach-Object { if ($_ -match '^(.*?)=(.*)$') { [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2]) } }
+Create the database using mongosh:
+
+Code   mongosh database/create-database.js
+⚠️ Attention: The default installation of MongoDB comes with authentication disabled.
+But if your installation has authentication, then use the following command:Codemongosh -u <root-user> -p <password> --authenticationDatabase admin create-database.js
+
+⚠️ Attention2: The database creation script stores a default admin user for authentication in the WebApp based on the configuration of the .env. It is strongly recommended to change these credentials in exposed systems.
+
+Run the API in development mode without debug:
+
+Code   python -m api.main
+ℹ️ With the default values from the .env, the API will be hosted at: http://localhost:5000/.
+Flask debug is disabled to avoid cluttering the terminal with excessive information.
+The logging in the API terminal should be sufficient for debugging purposes.
+
+Open a new PowerShell terminal and start the WebApp:
+
+Code   cd webapp   python -m http.server 3000
+ℹ️ Access the WebApp with any modern browser using the following link: http://localhost:3000/. 
+By default, the database creation step creates a user with the credentials admin/tcc-uff based on what was extracted from the .env.
+
+⚠️ Attention: For the WebApp to function correctly, the API must be running. 
+If you changed the values in the .env before starting the API, then adjust the code in webapp/scripts/config.js to use the correct URL.
+
+⚠️ Attention2: The API uses the values in the .env to register in CORS the address serving the WebApp.
+If you changed any values of the environment variables related to the WebApp before starting the API, then adjust the command above to start the WebApp at the correct URL.
+
+TODO: run the chatbot
+
+
+Your development environment is set up. Before building any system functionality:
+
+
+Finish reading this README.md;
+Finish reading the other documents in the Important Documentation section;
+Do your best to follow the local standardization of all components, such as code style, logging style, folder structure, naming conventions, etc.
+In the development of the API, after building or updating a new endpoint, review the respective documentation at the beginning of main.py and in the /doc/ folder;
+For any changes to the database structure, review the respective documentation in /doc/;
+After any implementation of functionality in the Chatbot, review the respective documentation in /doc/.
+For any file that is only needed in your own development environment, such as the .env, place it in .gitignore.
+
+
+
+Structure of this Repository
+Branch and Versioning Scheme
+As this project is an educational prototype for demonstrating the proposed computational solution of the thesis, all project versioning is controlled through commits in git on the main branch. Always use the latest commit to develop and deploy in any computational environment.
+Repository link: https://github.com/MarcosCezarMc/chatbot-tcc-saude
+
+Folder Structure
+Codechatbot-tcc-saude/│├── api/         # Backend API code that interacts with the database├── chatbot/     # Telegram chatbot code├── database/    # Database scripts├── doc/         # Project documentation and example .env ├── webapp/      # WebApp code│                # Other files in the root: README.md, .gitignore, etc.Important Documentation
+
+Project Architecture
+Database Structure
+API Structure
+Chatbot Functionality
+Deployment Instructions
+Project Deployment for the Thesis
+All implementations must have basic documentation on how to execute at the top of the main file.
+# Chatbot para Atendimento
 
 Chatbot de Telegram didático para atendimento a pacientes com as seguintes componentes:
 
